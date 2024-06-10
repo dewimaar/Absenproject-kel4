@@ -5,7 +5,7 @@
         <ul>
           <!-- Add more admin links here -->
         </ul>
-        <img src="/img/kucink.jpeg" alt="Profile Picture" class="profile-picture">
+        <img src="/img/profil.png" alt="Profile Picture" class="profile-picture">
       </div>
     </nav>
   </template>
@@ -59,9 +59,9 @@
   }
   
   .profile-picture {
-    border-radius: 50%; /* Mengubah foto profil menjadi bentuk lingkaran */
-    width: 40px; /* Sesuaikan ukuran foto profil dengan preferensi Anda */
-    height: 40px; /* Sesuaikan ukuran foto profil dengan preferensi Anda */
+    border-radius: 50%; 
+    width: 40px; 
+    height: 40px; 
   }
   </style>
   

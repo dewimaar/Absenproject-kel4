@@ -36,8 +36,12 @@ export default {
     return {
       searchQuery: '',
       kehadiranList: [
-        { id: 1, nama: 'John Doe', tanggal: '2024-06-01', status: 'Hadir', jamMasuk: '08:00', jamKeluar: '17:00', terlambat: 'No' },
-        { id: 2, nama: 'Jane Smith', tanggal: '2024-06-01', status: 'Hadir', jamMasuk: '08:15', jamKeluar: '17:30', terlambat: 'Yes' },
+        { id: 1, nama: 'Dewi Maharani', tanggal: '2024-06-01', status: 'Hadir', jamMasuk: '08:00', jamKeluar: '17:00', terlambat: 'No' },
+        { id: 2, nama: 'Annisa Aisyah', tanggal: '2024-06-01', status: 'Hadir', jamMasuk: '08:15', jamKeluar: '17:30', terlambat: 'Yes' },
+        { id: 3, nama: 'Azyumi Azra', tanggal: '2024-06-01', status: 'Hadir', jamMasuk: '08:00', jamKeluar: '17:30', terlambat: 'No' },
+        { id: 4, nama: 'Febi Gumas Wari', tanggal: '2024-06-01', status: 'Hadir', jamMasuk: '08:20', jamKeluar: '17:30', terlambat: 'Yes' },
+        { id: 5, nama: 'Kevin Farrell', tanggal: '2024-06-01', status: 'Hadir', jamMasuk: '08:20', jamKeluar: '17:30', terlambat: 'Yes' },
+        { id: 6, nama: 'Moh Holik', tanggal: '2024-06-01', status: 'Hadir', jamMasuk: '08:00', jamKeluar: '17:30', terlambat: 'No' },
         // Add more attendance records as needed
       ]
     };
