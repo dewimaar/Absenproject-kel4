@@ -1,17 +1,24 @@
 <template>
+  <h1>Laporan dan Analisis Karyawan</h1>
+  <hr class="title-underline"/>
   <div class="laporan">
-    <h1>Laporan dan Analisis Karyawan</h1>
     
     <!-- Top bar -->
     <div class="top-bar">
       <input type="text" v-model="searchQuery" placeholder="Search..." class="search-input"/>
-      <button @click="generateReport('pdf')" class="generate-button">Generate PDF</button>
-      <button @click="generateReport('excel')" class="generate-button">Generate Excel</button>
+      <div class="button-group">
+        <button @click="generateReport('pdf')" class="generate-button">
+          <img src="pdf_logo.png" alt="PDF Logo" class="logo"> Generate PDF
+        </button>
+        <button @click="generateReport('excel')" class="generate-button">
+          <img src="excel_logo.png" alt="Excel Logo" class="logo"> Generate Excel
+        </button>
+      </div>
     </div>
 
     <!-- Report sections -->
     <div class="report-section">
-      <h2>Laporan Kehadiran Karyawan</h2>
+      <h5>Laporan Kehadiran Karyawan</h5>
       <table class="laporan-table">
         <thead>
           <tr>
@@ -37,7 +44,7 @@
     </div>
 
     <div class="report-section">
-      <h2>Laporan Lembur</h2>
+      <h5>Laporan Lembur</h5>
       <table class="laporan-table">
         <thead>
           <tr>
@@ -59,7 +66,7 @@
     </div>
 
     <div class="report-section">
-      <h2>Laporan Cuti</h2>
+      <h5>Laporan Cuti</h5>
       <table class="laporan-table">
         <thead>
           <tr>
@@ -112,8 +119,8 @@
     <div class="analysis-section">
       <h2>Analisis Kinerja Karyawan</h2>
       <div class="charts-container">
-        <canvas id="performanceChart"></canvas>
-        <canvas id="attendanceChart"></canvas>
+        <canvas id="performanceChart" class="chart"></canvas>
+        <canvas id="attendanceChart" class="chart"></canvas>
       </div>
     </div>
   </div>
@@ -129,19 +136,19 @@ export default {
   setup() {
     const searchQuery = ref('');
     const attendanceRecords = ref([
-      { id : 1, nama: 'John Doe', tanggal: '2024-06-01', status: 'Hadir', jamMasuk: '08:00', jamKeluar: '17:00', terlambat: 'Tidak' },
+      { id: 1, nama: 'Dewi Maharani', tanggal: '2024-06-01', status: 'Hadir', jamMasuk: '08:00', jamKeluar: '17:00', terlambat: 'Tidak' },
       // Add more attendance records
     ]);
     const overtimeRecords = ref([
-      { id: 1, nama: 'John Doe', tanggal: '2024-06-01', jumlahJam: 2, keterangan: 'Project Deadline' },
+      { id: 1, nama: 'Dewi Maharani', tanggal: '2024-06-01', jumlahJam: 2, keterangan: 'Project Deadline' },
       // Add more overtime records
     ]);
     const leaveRecords = ref([
-      { id: 1, nama: 'John Doe', tanggalMulai: '2024-05-01', tanggalSelesai: '2024-05-05', jenisCuti: 'Cuti Tahunan', keterangan: 'Liburan' },
+      { id: 1, nama: 'Dewi Maharani', tanggalMulai: '2024-05-01', tanggalSelesai: '2024-05-05', jenisCuti: 'Cuti Tahunan', keterangan: 'Liburan' },
       // Add more leave records
     ]);
     const salaryRecords = ref([
-      { id: 1, nama: 'John Doe', periode: '2024-05', gajiPokok: 5000000, tunjangan: 500000, potongan: 0, totalGaji: 5500000 },
+      { id: 1, nama: 'Dewi Maharani', periode: '2024-05', gajiPokok: 5000000, tunjangan: 500000, potongan: 0, totalGaji: 5500000 },
       // Add more salary records
     ]);
 
@@ -249,26 +256,46 @@ export default {
 
 <style scoped>
 .laporan {
+  background-color: #ffffff;
   padding: 20px;
-  background-color: #f5f5f5;
-  border-radius: 8px;
+  border-radius: 10px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
 .laporan h1 {
   font-size: 2em;
   margin-bottom: 20px;
+  color: #333;
+}
+
+.title-underline {
+  border: 0;
+  height: 2px;
+  background: #848d84;
+  margin-bottom: 20px;
 }
 
 .laporan .top-bar {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 20px;
+  background-color: #ffffff;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .search-input {
   padding: 10px;
   width: 200px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.button-group {
+  display: flex;
 }
 
 .generate-button {
@@ -279,6 +306,7 @@ export default {
   cursor: pointer;
   border-radius: 5px;
   margin-left: 10px;
+  transition: background-color 0.3s ease;
 }
 
 .generate-button:hover {
@@ -293,16 +321,25 @@ export default {
   width: 100%;
   border-collapse: collapse;
   background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .laporan-table th,
 .laporan-table td {
   border: 1px solid #ddd;
-  padding: 8px;
+  padding: 12px;
+  text-align: left;
 }
 
 .laporan-table th {
   background-color: #f2f2f2;
+  color: #333;
+}
+
+.laporan-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
 }
 
 .analysis-section {
@@ -315,9 +352,8 @@ export default {
   flex-wrap: wrap;
 }
 
-/* Adjust the width and height of the charts */
 .chart {
-  width: calc(50% - 20px); /* Mengatur lebar agar berjejer dalam satu baris dengan jarak 20px */
+  width: calc(50% - 20px);
   height: 300px;
   margin-bottom: 20px;
   background-color: #ffffff;
@@ -325,4 +361,9 @@ export default {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
+@media (max-width: 768px) {
+  .chart {
+    width: 100%;
+  }
+}
 </style>

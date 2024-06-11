@@ -1,31 +1,38 @@
 <template>
-  <div class="kehadiran">
-    <h1>Kehadiran</h1>
-    <div class="search-bar">
-      <input type="text" v-model="searchQuery" placeholder="Search..." class="search-input"/>
+  <div class="attendance-page">
+    <h1>Daftar Kehadiran Karyawan</h1>
+    <div class="kehadiran">
+      <div class="top-bar">
+        <div class="search-container">
+          <div class="search-icon-container">
+            <i class="bi bi-search search-icon"></i>
+          </div>
+          <input type="text" v-model="searchQuery" placeholder="Search..." class="search-input"/>
+        </div>
+      </div>
+      <table class="kehadiran-table">
+        <thead>
+          <tr>
+            <th>Nama Karyawan</th>
+            <th>Tanggal</th>
+            <th>Status</th>
+            <th>Jam Masuk</th>
+            <th>Jam Keluar</th>
+            <th>Terlambat</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="kehadiran in filteredKehadiran" :key="kehadiran.id">
+            <td>{{ kehadiran.nama }}</td>
+            <td>{{ kehadiran.tanggal }}</td>
+            <td :class="getStatusClass(kehadiran.status)">{{ kehadiran.status }}</td>
+            <td>{{ kehadiran.jamMasuk }}</td>
+            <td>{{ kehadiran.jamKeluar }}</td>
+            <td :class="getTerlambatClass(kehadiran.terlambat)">{{ kehadiran.terlambat }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <table class="kehadiran-table">
-      <thead>
-        <tr>
-          <th>Nama Karyawan</th>
-          <th>Tanggal</th>
-          <th>Status</th>
-          <th>Jam Masuk</th>
-          <th>Jam Keluar</th>
-          <th>Terlambat</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="kehadiran in filteredKehadiran" :key="kehadiran.id">
-          <td>{{ kehadiran.nama }}</td>
-          <td>{{ kehadiran.tanggal }}</td>
-          <td>{{ kehadiran.status }}</td>
-          <td>{{ kehadiran.jamMasuk }}</td>
-          <td>{{ kehadiran.jamKeluar }}</td>
-          <td>{{ kehadiran.terlambat }}</td>
-        </tr>
-      </tbody>
-    </table>
   </div>
 </template>
 
@@ -57,50 +64,119 @@ export default {
         kehadiran.terlambat.toLowerCase().includes(this.searchQuery.toLowerCase())
       );
     }
+  },
+  methods: {
+    getStatusClass(status) {
+      return status === 'Hadir' ? 'status-hadir' : 'status-absent';
+    },
+    getTerlambatClass(terlambat) {
+      return terlambat === 'Yes' ? 'terlambat-yes' : 'terlambat-no';
+    }
   }
 };
 </script>
 
 <style scoped>
-.kehadiran {
+.attendance-page {
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f4f7;
   padding: 20px;
-  background-color: #f5f5f5;
-  border-radius: 8px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 2em; 
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.kehadiran {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
-.kehadiran h1 {
-  font-size: 2em;
-  margin-bottom: 10px;
-}
-
-.kehadiran p {
-  font-size: 1.2em;
-}
-
-.search-bar {
+.top-bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
   margin-bottom: 20px;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.search-icon-container {
+  background-color: #f2f2f2;
+  padding: 10px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.search-icon {
+  font-size: 18px;
+  color: #888;
 }
 
 .search-input {
   padding: 10px;
-  width: 200px;
+  border: 1px solid #ccc;
+  border-left: none;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: #4CAF50;
 }
 
 .kehadiran-table {
   width: 100%;
   border-collapse: collapse;
-  background-color: #ffffff; /* Background color putih */
 }
-
 
 .kehadiran-table th,
 .kehadiran-table td {
   border: 1px solid #ddd;
-  padding: 8px;
+  padding: 12px;
+  text-align: center;
 }
 
 .kehadiran-table th {
-  background-color: #f2f2f2;
+  background-color: #4CAF50;
+  color: white;
+}
+
+.kehadiran-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.status-hadir {
+  color: green;
+  font-weight: bold;
+}
+
+.status-absent {
+  color: red;
+  font-weight: bold;
+}
+
+.terlambat-yes {
+  color: red;
+  font-weight: bold;
+}
+
+.terlambat-no {
+  color: green;
+  font-weight: bold;
 }
 </style>
