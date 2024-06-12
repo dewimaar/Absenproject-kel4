@@ -1,7 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Dashboard from '../views/Dashboard.vue';
-import Attendance from '../components/Attendance.vue';
-import Overtime from '../components/Overtime.vue';
 import Leave from '../components/Leave.vue';
 import Payroll from '../components/Payroll.vue';
 import AdminDashboard from '../views/admin/AdminDashboard.vue';
@@ -19,16 +17,6 @@ const routes = [
     path: '/',
     name: 'Dashboard',
     component: Dashboard,
-  },
-  {
-    path: '/attendance',
-    name: 'Attendance',
-    component: Attendance,
-  },
-  {
-    path: '/overtime',
-    name: 'Overtime',
-    component: Overtime,
   },
   {
     path: '/leave',

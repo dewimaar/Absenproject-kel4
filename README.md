@@ -3,6 +3,14 @@
 ## Project setup
 ```
 npm install
+npm install bootstrap@5.3.3 bootstrap-icons
+npm install vuex
+npm install vuex@next
+npm install d3
+npm install chart.js@3
+npm install vue-router
+npm install vue-cal --save
+
 ```
 
 ### Compiles and hot-reloads for development
