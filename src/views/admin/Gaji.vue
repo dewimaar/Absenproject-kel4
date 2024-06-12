@@ -1,8 +1,7 @@
 <template>
   <div class="gaji">
-    <h1>Penggajian Karyawan</h1>
-    <hr class="title-underline"/>
-    
+    <h1>Daftar Gaji Karyawan</h1>
+    <div class="card">
     <div class="top-bar">
       <button @click="showModal = true" class="add-button">
         <i class="bi bi-plus-circle"></i> Tambah Gaji
@@ -62,6 +61,7 @@
           <button type="submit" class="submit-button">Tambah</button>
         </form>
       </div>
+      </div>
     </div>
   </div>
 </template>
@@ -117,19 +117,32 @@ export default {
 
 <style scoped>
 .gaji {
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f4f7;
   padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .gaji h1 {
   font-size: 2em;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  color: #333;
 }
 
-.title-underline {
-  border: 0;
-  height: 2px;
-  background: #848d84;
+h1 {
+  font-size: 2em; 
+  color: #333;
+  text-align: center;
   margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .top-bar {
@@ -192,7 +205,8 @@ export default {
 }
 
 .gaji-table th {
-  background-color: #f2f2f2;
+  background-color: #4CAF50;
+  color: white;
 }
 
 .modal {
@@ -206,7 +220,7 @@ export default {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .modal-content {

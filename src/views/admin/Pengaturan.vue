@@ -103,15 +103,25 @@ export default {
 
 <style scoped>
 .pengaturan {
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f4f7;
   padding: 20px;
-  background-color: #f5f5f5;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .pengaturan h1 {
   font-size: 2em;
   margin-bottom: 20px;
+  color: #333;
+}
+
+h1 {
+  font-size: 2em; 
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 600;
 }
 
 .pengaturan-section {

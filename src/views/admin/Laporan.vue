@@ -1,126 +1,121 @@
 <template>
-  <h1>Laporan dan Analisis Karyawan</h1>
-  <hr class="title-underline"/>
   <div class="laporan">
-    
-    <!-- Top bar -->
-    <div class="top-bar">
-      <input type="text" v-model="searchQuery" placeholder="Search..." class="search-input"/>
-      <div class="button-group">
-        <button @click="generateReport('pdf')" class="generate-button">
-          <img src="pdf_logo.png" alt="PDF Logo" class="logo"> Generate PDF
-        </button>
-        <button @click="generateReport('excel')" class="generate-button">
-          <img src="excel_logo.png" alt="Excel Logo" class="logo"> Generate Excel
-        </button>
+    <h1>Laporan dan Analisis Karyawan</h1>
+    <div class="card">
+      <div class="top-bar">
+      <div class="search-container">
+        <div class="search-icon-container">
+          <i class="bi bi-search search-icon"></i>
+        </div>
+        <input type="text" v-model="searchQuery" placeholder="Search..." class="search-input"/>
       </div>
-    </div>
+      </div>
+      <!-- Report sections -->
+      <div class="report-section">
+        <h4>Rekapitulasi Kehadiran Karyawan</h4>
+        <table class="laporan-table">
+          <thead>
+            <tr>
+              <th>Nama Karyawan</th>
+              <th>Tanggal</th>
+              <th>Status</th>
+              <th>Jam Masuk</th>
+              <th>Jam Keluar</th>
+              <th>Terlambat</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="record in filteredAttendanceRecords" :key="record.id">
+              <td>{{ record.nama }}</td>
+              <td>{{ record.tanggal }}</td>
+              <td>{{ record.status }}</td>
+              <td>{{ record.jamMasuk }}</td>
+              <td>{{ record.jamKeluar }}</td>
+              <td>{{ record.terlambat }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-    <!-- Report sections -->
-    <div class="report-section">
-      <h5>Laporan Kehadiran Karyawan</h5>
-      <table class="laporan-table">
-        <thead>
-          <tr>
-            <th>Nama Karyawan</th>
-            <th>Tanggal</th>
-            <th>Status</th>
-            <th>Jam Masuk</th>
-            <th>Jam Keluar</th>
-            <th>Terlambat</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="record in filteredAttendanceRecords" :key="record.id">
-            <td>{{ record.nama }}</td>
-            <td>{{ record.tanggal }}</td>
-            <td>{{ record.status }}</td>
-            <td>{{ record.jamMasuk }}</td>
-            <td>{{ record.jamKeluar }}</td>
-            <td>{{ record.terlambat }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+      <div class="report-section">
+        <h4>Rekapitulasi Lembur</h4>
+        <table class="laporan-table">
+          <thead>
+            <tr>
+              <th>Nama Karyawan</th>
+              <th>Tanggal</th>
+              <th>Jumlah Jam</th>
+              <th>Keterangan</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="record in filteredOvertimeRecords" :key="record.id">
+              <td>{{ record.nama }}</td>
+              <td>{{ record.tanggal }}</td>
+              <td>{{ record.jumlahJam }}</td>
+              <td>{{ record.keterangan }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-    <div class="report-section">
-      <h5>Laporan Lembur</h5>
-      <table class="laporan-table">
-        <thead>
-          <tr>
-            <th>Nama Karyawan</th>
-            <th>Tanggal</th>
-            <th>Jumlah Jam</th>
-            <th>Keterangan</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="record in filteredOvertimeRecords" :key="record.id">
-            <td>{{ record.nama }}</td>
-            <td>{{ record.tanggal }}</td>
-            <td>{{ record.jumlahJam }}</td>
-            <td>{{ record.keterangan }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+      <div class="report-section">
+        <h4>Rekapitulasi Cuti</h4>
+        <table class="laporan-table">
+          <thead>
+            <tr>
+              <th>Nama Karyawan</th>
+              <th>Tanggal Mulai</th>
+              <th>Tanggal Selesai</th>
+              <th>Jenis Cuti</th>
+              <th>Keterangan</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="record in filteredLeaveRecords" :key="record.id">
+              <td>{{ record.nama }}</td>
+              <td>{{ record.tanggalMulai }}</td>
+              <td>{{ record.tanggalSelesai }}</td>
+              <td>{{ record.jenisCuti }}</td>
+              <td>{{ record.keterangan }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-    <div class="report-section">
-      <h5>Laporan Cuti</h5>
-      <table class="laporan-table">
-        <thead>
-          <tr>
-            <th>Nama Karyawan</th>
-            <th>Tanggal Mulai</th>
-            <th>Tanggal Selesai</th>
-            <th>Jenis Cuti</th>
-            <th>Keterangan</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="record in filteredLeaveRecords" :key="record.id">
-            <td>{{ record.nama }}</td>
-            <td>{{ record.tanggalMulai }}</td>
-            <td>{{ record.tanggalSelesai }}</td>
-            <td>{{ record.jenisCuti }}</td>
-            <td>{{ record.keterangan }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+      <div class="report-section">
+        <h4>Rekapitulasi Penggajian</h4>
+        <table class="laporan-table">
+          <thead>
+            <tr>
+              <th>Nama Karyawan</th>
+              <th>Periode</th>
+              <th>Gaji Pokok</th>
+              <th>Tunjangan</th>
+              <th>Potongan</th>
+              <th>Total Gaji</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="record in filteredSalaryRecords" :key="record.id">
+              <td>{{ record.nama }}</td>
+              <td>{{ record.periode }}</td>
+              <td>{{ formatCurrency(record.gajiPokok) }}</td>
+              <td>{{ formatCurrency(record.tunjangan) }}</td>
+              <td>{{ formatCurrency(record.potongan) }}</td>
+              <td>{{ formatCurrency(record.totalGaji) }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-    <div class="report-section">
-      <h2>Laporan Penggajian</h2>
-      <table class="laporan-table">
-        <thead>
-          <tr>
-            <th>Nama Karyawan</th>
-            <th>Periode</th>
-            <th>Gaji Pokok</th>
-            <th>Tunjangan</th>
-            <th>Potongan</th>
-            <th>Total Gaji</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="record in filteredSalaryRecords" :key="record.id">
-            <td>{{ record.nama }}</td>
-            <td>{{ record.periode }}</td>
-            <td>{{ formatCurrency(record.gajiPokok) }}</td>
-            <td>{{ formatCurrency(record.tunjangan) }}</td>
-            <td>{{ formatCurrency(record.potongan) }}</td>
-            <td>{{ formatCurrency(record.totalGaji) }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Analysis section -->
-    <div class="analysis-section">
-      <h2>Analisis Kinerja Karyawan</h2>
-      <div class="charts-container">
-        <canvas id="performanceChart" class="chart"></canvas>
-        <canvas id="attendanceChart" class="chart"></canvas>
+      <!-- Analysis section -->
+      <div class="analysis-section">
+        <h4>Analisis Performa Karyawan</h4>
+        <div class="charts-container">
+          <canvas id="performanceChart" class="chart"></canvas>
+          <canvas id="attendanceChart" class="chart"></canvas>
+        </div>
       </div>
     </div>
   </div>
@@ -256,10 +251,11 @@ export default {
 
 <style scoped>
 .laporan {
-  background-color: #ffffff;
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f4f7;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .laporan h1 {
@@ -268,53 +264,57 @@ export default {
   color: #333;
 }
 
-.title-underline {
-  border: 0;
-  height: 2px;
-  background: #848d84;
+.card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 2em; 
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
   margin-bottom: 20px;
 }
 
-.laporan .top-bar {
+.search-container {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-  background-color: #ffffff;
+}
+
+.search-icon-container {
+  background-color: #f2f2f2;
   padding: 10px;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.search-icon {
+  font-size: 18px;
+  color: #888;
 }
 
 .search-input {
   padding: 10px;
-  width: 200px;
   border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-right: 10px;
-}
-
-.button-group {
-  display: flex;
-}
-
-.generate-button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  margin-left: 10px;
-  transition: background-color 0.3s ease;
-}
-
-.generate-button:hover {
-  background-color: #45a049;
+  border-left: none;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  outline: none;
 }
 
 .report-section {
   margin-bottom: 30px;
+  text-align: center;
 }
 
 .laporan-table {
@@ -334,8 +334,8 @@ export default {
 }
 
 .laporan-table th {
-  background-color: #f2f2f2;
-  color: #333;
+  background-color: #4CAF50;
+  color: #fff;
 }
 
 .laporan-table tbody tr:nth-child(even) {
@@ -344,6 +344,7 @@ export default {
 
 .analysis-section {
   margin-top: 40px;
+  text-align: center;
 }
 
 .charts-container {

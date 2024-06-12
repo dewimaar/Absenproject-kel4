@@ -1,8 +1,7 @@
 <template>
   <div class="data-jabatan">
     <h1>Data Jabatan</h1>
-    <hr class="title-underline"/>
-
+    <div class="card">
     <div class="top-bar">
       <button @click="showModal = true" class="add-button">
         <i class="bi bi-plus-circle"></i> Tambah Data Jabatan
@@ -48,6 +47,7 @@
         </form>
       </div>
     </div>
+  </div>
   </div>
 </template>
 
@@ -101,20 +101,32 @@ export default {
 
 <style scoped>
 .data-jabatan {
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f4f7;
   padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
+.data-jabatan h1 {
   font-size: 2em;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   color: #333;
 }
 
-.title-underline {
-  border: 0;
-  height: 2px;
-  background: #848d84;
+h1 {
+  font-size: 2em; 
+  color: #333;
+  text-align: center;
   margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .top-bar {
